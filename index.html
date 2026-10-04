@@ -5,139 +5,224 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Oefenkrak — oefen-apps voor de lagere school</title>
 <meta name="description" content="Rekenkrak, Taalkrak en Klokkrak: gratis oefen-apps voor de lagere school. Zelf oefenen of meedoen met de klas via QR-code.">
-<meta name="theme-color" content="#FFC233">
+<meta name="theme-color" content="#FFF8EC">
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
 <link rel="icon" href="rekenkrak/icon-192.png">
 <link rel="apple-touch-icon" href="rekenkrak/apple-touch-icon.png">
+<link rel="preload" href="fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Nunito Krak";src:url("fonts/nunito.woff2") format("woff2");font-weight:200 1000;font-display:swap}
+@font-face{font-family:"Fredoka Krak";src:url("fonts/fredoka.woff2") format("woff2");font-weight:300 700;font-display:swap}
 :root{
-  --ink:#2B2D42; --ink-soft:#5A5C73; --paper:#FFF9F0; --card:#FFFFFF;
-  --sun:#FFC233; --sun-deep:#F2A20C; --grass:#36A85B; --grass-deep:#268043;
-  --berry:#E5566B; --berry-deep:#C73B52; --sky:#46B8E8; --sky-deep:#2A93C2;
-  --plum:#7B5EA7; --line:#EBE2D2;
-  --shadow:0 14px 30px rgba(43,45,66,.12), 0 3px 8px rgba(43,45,66,.08);
-  --shadow-sm:0 4px 12px rgba(43,45,66,.10);
-  --round:22px;
-  --font:ui-rounded,"SF Pro Rounded","Hiragino Maru Gothic ProN","Baloo 2",Nunito,"Segoe UI",Roboto,system-ui,-apple-system,sans-serif;
+  --ink:#25273C; --ink-soft:#5F6178; --paper:#FFF8EC; --card:#FFFFFF;
+  --line:#ECE2D0; --line-deep:#DCCDB3; --cream:#F7F0E3; --cream-deep:#E6DAC4;
+  --sun:#FFC233; --sun-deep:#E59A00; --sun-soft:#FFF0C7;
+  --grass:#3BB56A; --grass-deep:#26874B; --grass-soft:#DDF4E5;
+  --sky:#3FB4EC; --sky-deep:#1F8CC4; --sky-soft:#DDF1FB;
+  --berry:#EC5A72;
+  --font:"Nunito Krak",ui-rounded,"Segoe UI",Roboto,system-ui,sans-serif;
+  --display:"Fredoka Krak","Nunito Krak",ui-rounded,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  font-family:var(--font); color:var(--ink);
-  background:radial-gradient(120% 80% at 50% -10%, #FFF7E6 0%, var(--paper) 55%) fixed;
-  min-height:100dvh; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-}
+html{background-color:var(--paper);
+  background-image:radial-gradient(rgba(150,120,70,.11) 1.3px, transparent 1.6px);background-size:22px 22px}
+body{margin:0;font-family:var(--font);font-weight:600;color:var(--ink);min-height:100dvh;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:10px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:12px}
 
-.wrap{max-width:960px;margin:0 auto;padding:34px 18px 64px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px 56px}
 
-.head{text-align:center;margin:8px 0 30px}
-.head__logo{width:76px;height:76px;border-radius:22px;margin:0 auto 16px;
-  background:linear-gradient(150deg,var(--sun),var(--sun-deep));
-  box-shadow:var(--shadow);display:grid;place-items:center;
-  font-size:40px;font-weight:800;color:#fff;line-height:1}
-h1{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:-.025em;margin:0}
-.head__sub{margin:8px auto 0;max-width:34em;color:var(--ink-soft);font-size:clamp(15px,2.4vw,17px);font-weight:600;line-height:1.5}
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;padding:56px 0 40px}
+.hero__badges{position:relative;height:96px;width:250px;margin:0 auto 26px}
+.badge{position:absolute;top:0;width:84px;height:84px;border-radius:26px;display:block;
+  box-shadow:0 5px 0 rgba(0,0,0,.14), 0 16px 30px rgba(60,45,20,.12);border:4px solid #fff;background:#fff}
+.badge img{width:100%;height:100%;border-radius:22px;display:block}
+.badge--1{left:0;transform:rotate(-9deg) translateY(10px)}
+.badge--2{left:83px;transform:translateY(-4px);z-index:2}
+.badge--3{right:0;transform:rotate(9deg) translateY(10px)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(44px,9vw,72px);line-height:1;letter-spacing:-.015em;margin:0}
+h1 .k{color:var(--sun-deep)}
+.hero__sub{margin:16px auto 0;max-width:31em;color:var(--ink-soft);font-size:clamp(16px,2.4vw,19px);font-weight:700;line-height:1.5}
+.hero__tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
+.tag{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:2px solid var(--line);
+  border-radius:999px;padding:7px 14px 7px 10px;font-size:14px;font-weight:800;color:var(--ink-soft);box-shadow:0 2px 0 var(--line-deep)}
+.tag svg{width:18px;height:18px;color:var(--grass)}
 
-.grid{display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+/* ---------- app cards ---------- */
+.grid{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px;box-shadow:0 6px 0 var(--line-deep);
+  display:flex;flex-direction:column;overflow:hidden}
+.card__top{position:relative;padding:26px 22px 20px;display:flex;align-items:center;gap:16px;
+  background:var(--soft);border-bottom:2px solid var(--line)}
+.card__top::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.45)}
+.card__icon{position:relative;z-index:1;width:68px;height:68px;border-radius:21px;flex:none;
+  border:3px solid #fff;box-shadow:0 4px 0 var(--deep)}
+.card__name{position:relative;z-index:1;font-family:var(--display);font-weight:600;font-size:27px;letter-spacing:-.01em;margin:0;line-height:1.05}
+.card__claim{position:relative;z-index:1;margin:4px 0 0;font-size:14px;font-weight:800;color:var(--deep)}
+.card__body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:18px;flex:1}
+.card__text{margin:0;font-size:15.5px;font-weight:600;color:var(--ink-soft);line-height:1.55;flex:1}
+.card__links{display:flex;flex-direction:column;gap:12px}
+.card--reken{--soft:var(--sun-soft);--main:var(--sun);--deep:var(--sun-deep)}
+.card--taal{--soft:var(--grass-soft);--main:var(--grass);--deep:var(--grass-deep)}
+.card--klok{--soft:var(--sky-soft);--main:var(--sky);--deep:var(--sky-deep)}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--round);
-  box-shadow:var(--shadow);padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px}
-.card__top{display:flex;align-items:center;gap:14px}
-.card__icon{width:58px;height:58px;border-radius:17px;flex:none;box-shadow:var(--shadow-sm);
-  object-fit:cover;background:#F6EFE2}
-.card__name{font-size:21px;font-weight:800;letter-spacing:-.015em;margin:0}
-.card__claim{margin:2px 0 0;font-size:13.5px;font-weight:700;color:var(--ink-soft)}
-.card__text{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-soft);line-height:1.55;flex:1}
-.card__links{display:flex;flex-direction:column;gap:9px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:14px 16px;border-radius:16px;
+  font-weight:800;font-size:16.5px;text-decoration:none;transition:transform .08s, box-shadow .08s, filter .15s}
+.btn svg{width:18px;height:18px}
+.btn--go{background:var(--main);color:#fff;box-shadow:0 4px 0 var(--deep)}
+.card--reken .btn--go{color:#4A3300}
+.btn--teacher{background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 4px 0 var(--line-deep);padding:12px 16px}
+.btn:active{transform:translateY(3px)}
+.btn--go:active{box-shadow:0 1px 0 var(--deep)}
+.btn--teacher:active{box-shadow:0 1px 0 var(--line-deep)}
+@media (hover:hover){.btn:hover{transform:translateY(-1px);filter:brightness(1.03)}}
 
-.btn{display:block;text-align:center;padding:13px 14px;border-radius:15px;
-  font-weight:800;font-size:15.5px;text-decoration:none;transition:transform .08s, filter .15s}
-.btn:active{transform:scale(.97)}
-.btn--go{color:#fff}
-.btn--sun{background:linear-gradient(150deg,var(--sun),var(--sun-deep))}
-.btn--grass{background:linear-gradient(150deg,var(--grass),var(--grass-deep))}
-.btn--sky{background:linear-gradient(150deg,var(--sky),var(--sky-deep))}
-.btn--teacher{background:#F6EFE2;color:var(--ink)}
-.btn:hover{filter:brightness(1.04)}
+/* ---------- how it works ---------- */
+.how{margin-top:64px;text-align:center}
+.how h2,.note h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4vw,34px);margin:0;letter-spacing:-.01em}
+.how__sub{margin:8px auto 0;color:var(--ink-soft);font-weight:700;max-width:34em;line-height:1.5}
+.steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:28px;counter-reset:step}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{position:relative;background:var(--card);border:2px solid var(--line);border-radius:24px;box-shadow:0 4px 0 var(--line-deep);
+  padding:26px 22px 22px;text-align:left}
+.step__ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:#fff;margin-bottom:14px}
+.step__ic svg{width:28px;height:28px}
+.step:nth-child(1) .step__ic{background:var(--sun);box-shadow:0 3px 0 var(--sun-deep);color:#5A3E00}
+.step:nth-child(2) .step__ic{background:var(--sky);box-shadow:0 3px 0 var(--sky-deep)}
+.step:nth-child(3) .step__ic{background:var(--grass);box-shadow:0 3px 0 var(--grass-deep)}
+.step::before{counter-increment:step;content:counter(step);position:absolute;right:20px;top:16px;
+  font-family:var(--display);font-weight:600;font-size:44px;line-height:1;color:var(--cream-deep)}
+.step b{display:block;font-family:var(--display);font-weight:600;font-size:20px;margin-bottom:6px}
+.step p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.55}
 
-.note{margin:34px auto 0;max-width:660px;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--round);box-shadow:var(--shadow-sm);padding:20px 22px}
-.note h2{margin:0 0 8px;font-size:16.5px;font-weight:800}
-.note p{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-soft);line-height:1.6}
+/* ---------- note ---------- */
+.note{margin:56px auto 0;max-width:760px;background:#2B2D45;color:#fff;border-radius:28px;box-shadow:0 6px 0 #191A2B;
+  padding:30px 30px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1.3px, transparent 1.6px);background-size:20px 20px}
+.note__ic{width:56px;height:56px;border-radius:18px;background:var(--sun);color:#5A3E00;display:grid;place-items:center;box-shadow:0 4px 0 var(--sun-deep)}
+.note__ic svg{width:30px;height:30px}
+.note h2{font-size:24px;margin-bottom:8px}
+.note p{margin:0;color:#D9D7E8;font-size:15.5px;line-height:1.6}
 .note p + p{margin-top:10px}
+@media(max-width:560px){.note{grid-template-columns:1fr;padding:26px 22px}}
 
-footer{margin-top:34px;text-align:center;font-size:13px;font-weight:600;color:var(--ink-soft)}
-footer a{text-decoration:none;border-bottom:1px solid var(--line)}
+footer{margin-top:44px;text-align:center;font-size:14px;font-weight:700;color:var(--ink-soft)}
+
+@media (prefers-reduced-motion: reduce){.badge{transform:none !important}.btn{transition:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="head">
-    <div class="head__logo" aria-hidden="true">K</div>
-    <h1>Oefenkrak</h1>
-    <p class="head__sub">Gratis oefen-apps voor de lagere school. Zelf oefenen op de tablet, of samen met de klas via een QR-code van de leerkracht.</p>
+  <header class="hero">
+    <div class="hero__badges" aria-hidden="true">
+      <span class="badge badge--1"><img src="rekenkrak/icon-192.png" alt="" width="76" height="76"></span>
+      <span class="badge badge--2"><img src="taalkrak/icon-192.png" alt="" width="76" height="76"></span>
+      <span class="badge badge--3"><img src="klokkrak/icon-192.png" alt="" width="76" height="76"></span>
+    </div>
+    <h1>Oefen<span class="k">krak</span></h1>
+    <p class="hero__sub">Gratis oefen-apps voor de lagere school. Zelf oefenen op de tablet, of samen met de klas via een QR-code van de leerkracht.</p>
+    <div class="hero__tags">
+      <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Gratis</span>
+      <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Geen account nodig</span>
+      <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Werkt offline</span>
+    </div>
   </header>
 
   <main class="grid">
 
-    <article class="card">
+    <article class="card card--reken">
       <div class="card__top">
-        <img class="card__icon" src="rekenkrak/icon-192.png" alt="" width="58" height="58">
+        <img class="card__icon" src="rekenkrak/icon-192.png" alt="" width="68" height="68">
         <div>
           <h2 class="card__name">Rekenkrak</h2>
           <p class="card__claim">Word een krak in rekenen!</p>
         </div>
       </div>
-      <p class="card__text">Plus, min, keer, gedeeld en splitsen — met een tijdsoptie voor de maaltafels.</p>
-      <div class="card__links">
-        <a class="btn btn--go btn--sun" href="rekenkrak/">Oefenen</a>
-        <a class="btn btn--teacher" href="rekenkrak/leerkracht.html">Voor de leerkracht</a>
+      <div class="card__body">
+        <p class="card__text">Plus, min, keer, gedeeld en splitsen — met een tijdsoptie voor de maaltafels.</p>
+        <div class="card__links">
+          <a class="btn btn--go" href="rekenkrak/">Oefenen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+          <a class="btn btn--teacher" href="rekenkrak/leerkracht.html">Voor de leerkracht</a>
+        </div>
       </div>
     </article>
 
-    <article class="card">
+    <article class="card card--taal">
       <div class="card__top">
-        <img class="card__icon" src="taalkrak/icon-192.png" alt="" width="58" height="58">
+        <img class="card__icon" src="taalkrak/icon-192.png" alt="" width="68" height="68">
         <div>
           <h2 class="card__name">Taalkrak</h2>
           <p class="card__claim">Word een krak in taal!</p>
         </div>
       </div>
-      <p class="card__text">Nederlandse spelling per graad, volgens de leerlijn van het Vlaamse basisonderwijs.</p>
-      <div class="card__links">
-        <a class="btn btn--go btn--grass" href="taalkrak/">Oefenen</a>
-        <a class="btn btn--teacher" href="taalkrak/leerkracht.html">Voor de leerkracht</a>
+      <div class="card__body">
+        <p class="card__text">Nederlandse spelling per graad, volgens de leerlijn van het Vlaamse basisonderwijs.</p>
+        <div class="card__links">
+          <a class="btn btn--go" href="taalkrak/">Oefenen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+          <a class="btn btn--teacher" href="taalkrak/leerkracht.html">Voor de leerkracht</a>
+        </div>
       </div>
     </article>
 
-    <article class="card">
+    <article class="card card--klok">
       <div class="card__top">
-        <img class="card__icon" src="klokkrak/icon-192.png" alt="" width="58" height="58">
+        <img class="card__icon" src="klokkrak/icon-192.png" alt="" width="68" height="68">
         <div>
           <h2 class="card__name">Klokkrak</h2>
           <p class="card__claim">Word een krak in klokkijken!</p>
         </div>
       </div>
-      <p class="card__text">Kloklezen per graad, opgebouwd volgens de GO!-visietekst kloklezen.</p>
-      <div class="card__links">
-        <a class="btn btn--go btn--sky" href="klokkrak/">Oefenen</a>
-        <a class="btn btn--teacher" href="klokkrak/leerkracht.html">Voor de leerkracht</a>
+      <div class="card__body">
+        <p class="card__text">Kloklezen per graad, opgebouwd volgens de GO!-visietekst kloklezen.</p>
+        <div class="card__links">
+          <a class="btn btn--go" href="klokkrak/">Oefenen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+          <a class="btn btn--teacher" href="klokkrak/leerkracht.html">Voor de leerkracht</a>
+        </div>
       </div>
     </article>
 
   </main>
 
+  <section class="how" aria-labelledby="how-title">
+    <h2 id="how-title">Zo werkt het in de klas</h2>
+    <p class="how__sub">In drie stappen staat een oefening op maat op de tablets van je leerlingen.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg></div>
+        <b>Stel samen</b>
+        <p>Kies in de leerkracht-tool het leerjaar, het onderwerp en hoeveel oefeningen.</p>
+      </div>
+      <div class="step">
+        <div class="step__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5v-3A1.5 1.5 0 0 1 5.5 4h3M15.5 4h3A1.5 1.5 0 0 1 20 5.5v3M20 15.5v3a1.5 1.5 0 0 1-1.5 1.5h-3M8.5 20h-3A1.5 1.5 0 0 1 4 18.5v-3"/><rect x="8" y="8" width="3" height="3" rx=".5"/><rect x="13" y="8" width="3" height="3" rx=".5"/><rect x="8" y="13" width="3" height="3" rx=".5"/><path d="M13 13h3v3"/></svg></div>
+        <b>Deel de QR-code</b>
+        <p>Toon de code op het bord of druk ze af. Een link kopiëren kan ook.</p>
+      </div>
+      <div class="step">
+        <div class="step__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></div>
+        <b>Oefenen maar!</b>
+        <p>Leerlingen scannen de code en zijn meteen bezig. Er is niets te installeren.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="note">
-    <h2>Voor leerkrachten</h2>
-    <p>Elke app heeft een leerkracht-tool waarmee je oefeningen op maat maakt en ze deelt via een QR-code of een link. Leerlingen scannen de code en zijn meteen bezig — er is niets te installeren en geen account nodig.</p>
-    <p>Elke app werkt ook offline: laat leerlingen de app één keer openen en op het beginscherm zetten, dan blijft ze werken zonder internet.</p>
+    <div class="note__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.8a14 14 0 0 1 19 0"/><path d="M5.8 12.4a9 9 0 0 1 12.4 0"/><path d="M9 16a4.3 4.3 0 0 1 6 0"/><circle cx="12" cy="19.3" r="1.1" fill="currentColor"/><path d="M3.5 3.5l17 17"/></svg></div>
+    <div>
+      <h2>Werkt ook zonder internet</h2>
+      <p>Laat leerlingen de app één keer openen en op het beginscherm zetten. Daarna blijft ze werken, ook als het wifi in de klas het even laat afweten.</p>
+      <p>Elke app heeft een leerkracht-tool waarmee je oefeningen op maat maakt en deelt via een QR-code of een link.</p>
+    </div>
   </section>
 
   <footer>
-    Gemaakt door Jelle Braum · <a href="https://github.com/jellebraum-dotcom">broncode op GitHub</a>
+    Oefenkrak – automatisatie op maat
   </footer>
 
 </div>
