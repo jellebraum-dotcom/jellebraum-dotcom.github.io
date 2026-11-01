@@ -138,6 +138,47 @@ h1 .k{color:var(--sun-deep)}
 
 footer{margin-top:44px;text-align:center;font-size:14px;font-weight:700;color:var(--ink-soft)}
 
+/* ---------- groot scherm: alles op één scherm, zonder scrollen ---------- */
+@media (min-width:1240px) and (min-height:700px){
+  .wrap{max-width:1240px;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:20px 24px 16px}
+  .hero{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:"badges title sub" "badges title tags";
+    column-gap:30px;row-gap:10px;align-items:center;text-align:left;padding:0}
+  .hero__badges{grid-area:badges;width:200px;height:80px;margin:0}
+  .badge{width:68px;height:68px;border-radius:21px}
+  .badge img{border-radius:17px}
+  .badge--2{left:66px}
+  h1{grid-area:title;font-size:64px}
+  .hero__sub{grid-area:sub;margin:0;max-width:none;font-size:17px;align-self:end}
+  .hero__tags{grid-area:tags;justify-content:flex-start;margin:0;align-self:start}
+
+  .card__top{padding:16px 20px 14px}
+  .card__icon{width:56px;height:56px;border-radius:18px}
+  .card__name{font-size:25px}
+  .card__body{padding:16px 20px 18px;gap:14px}
+  .card__text{font-size:15px;line-height:1.5}
+  .card__links{flex-direction:row;gap:10px}
+  .card__links .btn{flex:1;padding:12px 10px;font-size:15.5px}
+  .card__links .btn--teacher{padding:10px}
+
+  .bottom{display:grid;grid-template-columns:1.7fr 1fr;gap:24px;align-items:stretch}
+  .how{margin:0;text-align:left}
+  .how h2{font-size:26px}
+  .how__sub{margin:4px 0 0;max-width:none;font-size:15px}
+  .steps{margin-top:14px;gap:14px}
+  .step{padding:16px;border-radius:20px}
+  .step__ic{width:40px;height:40px;border-radius:13px;margin-bottom:10px}
+  .step__ic svg{width:22px;height:22px}
+  .step::before{font-size:34px;top:12px;right:16px}
+  .step b{font-size:18px;margin-bottom:4px}
+  .step p{font-size:14px;line-height:1.45}
+  .note{margin:0;max-width:none;padding:22px;gap:16px;border-radius:24px;align-content:center}
+  .note__ic{width:46px;height:46px;border-radius:15px}
+  .note__ic svg{width:24px;height:24px}
+  .note h2{font-size:22px;margin-bottom:6px}
+  .note p{font-size:14.5px;line-height:1.5}
+  footer{margin:0}
+}
+
 @media (prefers-reduced-motion: reduce){.badge{transform:none !important}.btn{transition:none}}
 </style>
 </head>
@@ -214,6 +255,8 @@ footer{margin-top:44px;text-align:center;font-size:14px;font-weight:700;color:va
 
   </main>
 
+  <div class="bottom">
+
   <section class="how" aria-labelledby="how-title">
     <h2 id="how-title">Zo werkt het in de klas</h2>
     <p class="how__sub">In drie stappen staat een oefening op maat op de tablets van je leerlingen.</p>
@@ -244,6 +287,8 @@ footer{margin-top:44px;text-align:center;font-size:14px;font-weight:700;color:va
       <p>Elke app heeft een leerkracht-tool waarmee je oefeningen op maat maakt en deelt via een QR-code of een link.</p>
     </div>
   </section>
+
+  </div>
 
   <footer>
     Oefenkrak – automatisatie op maat
