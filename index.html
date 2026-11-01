@@ -55,6 +55,10 @@ html{background-color:var(--paper);
 body{margin:0;font-family:var(--font);font-weight:600;color:var(--ink);min-height:100dvh;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit}
+/* app-gevoel: geen tekstselectie of slepen van afbeeldingen */
+body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+img{-webkit-user-drag:none;user-drag:none}
+::selection{background:var(--sun-soft);color:inherit}
 :focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:12px}
 
 .wrap{max-width:1020px;margin:0 auto;padding:0 20px 56px}
